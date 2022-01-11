@@ -32,4 +32,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - print-url
+      - print-url:
+          requires:
+            - say-hello
