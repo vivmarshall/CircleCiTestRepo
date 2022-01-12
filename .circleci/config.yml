@@ -25,6 +25,14 @@ jobs:
       - run:
           name: "print url"
           command: "echo $CIRCLE_REPOSITORY_URL"
+  print-branch:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "print url"
+          command: "echo $CRICLE_BRANCH"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -35,3 +43,12 @@ workflows:
       - print-url:
           requires:
             - say-hello
+          filters:
+            branches:
+              only: development
+      - print-branch:
+          requires:
+            - say-hello
+          filters:
+            branches:
+              ignore: development
